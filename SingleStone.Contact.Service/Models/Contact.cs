@@ -13,6 +13,7 @@ namespace SingleStone.Contact.Service.Models
 
     public class Contact
     {
+       
         [JsonPropertyName("id")]
         public int Id { get; set; }
        
@@ -28,16 +29,22 @@ namespace SingleStone.Contact.Service.Models
         [JsonPropertyName("email")]
         public string Email { get; set; }
 
+        /// <summary>
+        /// Return a contact based on the passed Id
+        /// </summary>
         public static Contact GetById(int id, IOptions<ContactOptions> options) {
             using (var db = new LiteDatabase(options.Value.GetConnectionString()))
             {
                 var collection = db.GetCollection<Contact>("contacts");
                 var contact = collection.FindById(id);
-                return collection.FindById(id);
+                return contact;
             }
             //return null;
         }
 
+        /// <summary>
+        /// Returns all contacts in the system
+        /// </summary>
         public static IEnumerable<Contact> GetAll(IOptions<ContactOptions> options) {
             var contacts = new List<Contact>();
             using (var db = new LiteDatabase(options.Value.GetConnectionString()))
@@ -45,6 +52,19 @@ namespace SingleStone.Contact.Service.Models
                 var collection = db.GetCollection<Contact>("contacts");
                 // return a lit of found "all"
                 return collection.FindAll().ToList();
+            }
+        }
+
+        /// <summary>
+        /// Returns all contacts with a matching email
+        /// </summary>
+        public static IEnumerable<Contact> GetByEmail(string email, IOptions<ContactOptions> options)
+        {
+            using (var db = new LiteDatabase(options.Value.GetConnectionString()))
+            {
+                var collection = db.GetCollection<Contact>("contacts");
+                var contacts = collection.Find(Query.Contains("Email", email)).ToList();
+                return contacts;
             }
         }
 

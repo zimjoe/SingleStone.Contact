@@ -13,7 +13,7 @@ namespace SingleStone.Contact.Service.Models
         public string PhoneNumber { get; set; }
 
         [JsonPropertyName("type")]
-        public string Phonetype { get; set; }
+        public string PhoneType { get; set; }
 
        
     }
@@ -25,5 +25,11 @@ namespace SingleStone.Contact.Service.Models
         public const string Home = "home";
         public const string Work = "work";
         public const string Mobile = "mobile";
+
+        public static IEnumerable<string> AllTypes {
+            get {
+                return new List<string> { Home, Work, Mobile };
+            }
+        }
     }
 }

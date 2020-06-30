@@ -10,7 +10,12 @@ namespace SingleStone.Contact.Service.Utilities
 {
     public class ContactOptions
     {
-        public ContactOptions() { }
+        public ContactOptions() {
+            // set this the first time it's created.  
+            if (!string.IsNullOrWhiteSpace(DatabaseName)) {
+                ContactOptions.ConnectionString = GetConnectionString();
+            }
+        }
 
         /// <summary>
         /// Name of the section in the config file
@@ -35,9 +40,9 @@ namespace SingleStone.Contact.Service.Utilities
         /// application root and the App_Data file
         /// </summary>
         public string GetConnectionString() {
-            
             return Path.Combine(WebRoot, "App_Data", DatabaseName);
-
         }
+
+        public static string ConnectionString { get; set; }
     }
 }
