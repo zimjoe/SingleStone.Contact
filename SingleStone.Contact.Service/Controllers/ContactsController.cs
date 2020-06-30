@@ -37,6 +37,7 @@ namespace SingleStone.Contact.Service.Controllers
         [HttpGet("{id}")]
         public Models.Contact Get(int id)
         {
+            // should throw 401 when not found rather than empty 
             return Models.Contact.GetById(id, options);
         }
 
@@ -45,10 +46,7 @@ namespace SingleStone.Contact.Service.Controllers
         [HttpPost]
         public void Post( Models.Contact value)
         {
-            if (ModelState.IsValid) {
-                value.Save(options);
-            }
-            
+             value.Save(options);
         }
 
         // PUT /<EmailController>/5
@@ -66,6 +64,7 @@ namespace SingleStone.Contact.Service.Controllers
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+            // should throw error when not found?
             Models.Contact.Delete(id, options);
         }
 
