@@ -33,6 +33,8 @@ namespace SingleStone.Contact.Service
                 //...mvc setup...
             }).AddFluentValidation();
 
+            services.AddHttpContextAccessor();
+
             // add validators.  Would move this if there were more of these
             services.AddTransient<IValidator<Models.Contact>, Validators.ContactValidator>();
             services.AddTransient<IValidator<Models.ContactName>, Validators.ContactNameValidator>();

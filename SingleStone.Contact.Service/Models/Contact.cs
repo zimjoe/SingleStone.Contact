@@ -24,7 +24,7 @@ namespace SingleStone.Contact.Service.Models
         public Address Address { get; set; }
 
         [JsonPropertyName("phone")]
-        public Phone Phone { get; set; }
+        public IList<Phone> Phones { get; set; }
 
         [JsonPropertyName("email")]
         public string Email { get; set; }
