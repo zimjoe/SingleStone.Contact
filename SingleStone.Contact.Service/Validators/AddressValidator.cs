@@ -14,9 +14,10 @@ namespace SingleStone.Contact.Service.Validators
 			// built in Email Validator
 			RuleFor(x => x.Street).NotNull().MaximumLength(255);
 			RuleFor(x => x.City).NotNull().MaximumLength(100);
-
+			// totally could use a list for better validation
 			RuleFor(x => x.State).Length(2);
-			RuleFor(x => x.Zip).Length(5,10); 
+			// allow 5 or 9 digit zips with or without the dash
+			RuleFor(x => x.Zip).NotNull().Matches(@"(^\d{5}$)|(^\d{9}$)|(^\d{5}-\d{4}$)"); 
 
 		}
 	}
