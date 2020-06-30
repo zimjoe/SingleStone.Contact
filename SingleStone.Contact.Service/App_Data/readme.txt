@@ -1,0 +1,1 @@
+﻿The Contacts.db file will end up in this folder.  I didn't want to include the DB, but I bneeded the folder to be created so I included this file.
